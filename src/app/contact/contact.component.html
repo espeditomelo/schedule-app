@@ -6,11 +6,26 @@
     <input formControlName="name" matInput placeholder="Insert your name">
   </mat-form-field>
 
+  <div *ngIf="contactForm.controls.name.errors">
+    <div *ngIf="contactForm.controls.name.errors.required">
+      The name is required
+    </div>
+  </div>
+
   <mat-form-field class="fullWidth">
     <mat-label>Email</mat-label>
     <input formControlName="email" matInput placeholder="Insert your email">
   </mat-form-field>
 
-  <button mat-button color="primary">Add</button>
+  <div *ngIf="contactForm.controls.email.errors">
+    <div *ngIf="contactForm.controls.email.errors.required">
+      The e-mail is required
+    </div>
+    <div *ngIf="contactForm.controls.email.errors.email">
+      The e-mail must be valid
+    </div>
+  </div>
+
+  <button [disabled]="!contactForm.valid" mat-button color="primary">Add</button>
 
 </form>
