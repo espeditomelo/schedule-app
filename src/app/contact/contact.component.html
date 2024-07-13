@@ -1,10 +1,50 @@
-<mat-toolbar>Contacts</mat-toolbar>
+<mat-toolbar>
+  <mat-icon>person</mat-icon>
+  Contacts
+</mat-toolbar>
 
 <mat-tab-group>
-  <mat-tab label="All">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>group</mat-icon>
+      All
+    </ng-template>
+    <mat-card>
+      <table mat-table [dataSource]="contacts" class="fullWidth">
 
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let contact"> {{ contact.id }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let contact"> {{ contact.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let contact"> {{ contact.email }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="favorite">
+          <th mat-header-cell *matHeaderCellDef> Favorite </th>
+          <td mat-cell *matCellDef="let contact">
+            <mat-icon>{{ contact.favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+      </table>
+    </mat-card>
   </mat-tab>
-  <mat-tab label="New">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>person_add</mat-icon>
+      New
+    </ng-template>
     <mat-card class="halfWidth">
       <mat-card-title>New Contact</mat-card-title>
       <form [formGroup]="contactForm" (ngSubmit)="submit()">

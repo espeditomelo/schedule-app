@@ -12,6 +12,7 @@ export class ContactComponent implements OnInit {
 
    contactForm: FormGroup;
    contacts: Contact[] = [];
+   columns = ['id','name','email','favorite'];
 
   constructor(
     private service: ContactService,
@@ -19,10 +20,22 @@ export class ContactComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.listContacts();
+    this.mountForm();
+  }
+
+  mountForm(){
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.email]
     })
+  }
+
+  listContacts(){
+    this.service.list()
+      .subscribe(response => {
+        this.contacts = response;
+      })
   }
 
   submit(){
