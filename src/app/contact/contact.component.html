@@ -49,6 +49,7 @@
     </ng-template>
     <mat-card class="halfWidth">
       <mat-card-title>New Contact</mat-card-title>
+      
       <form [formGroup]="contactForm" (ngSubmit)="submit()">
         <mat-form-field class="fullWidth">
           <mat-label>Name</mat-label>
@@ -75,7 +76,7 @@
           </div>
         </div>
 
-        <button [disabled]="!contactForm.valid" mat-button color="primary">Add</button>
+        <button [disabled]="!contactForm.valid" mat-raised-button color="primary">Add</button>
 
       </form>
     </mat-card>
