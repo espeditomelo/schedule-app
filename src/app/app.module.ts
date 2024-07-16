@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,12 +18,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './contact.service';
+import { DetailContactComponent } from './detail-contact/detail-contact.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactComponent
+    ContactComponent,
+    DetailContactComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,7 @@ import { ContactService } from './contact.service';
     MatTableModule,
     MatCardModule,
     MatIconModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   providers: [
