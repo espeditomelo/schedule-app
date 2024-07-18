@@ -5,6 +5,9 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { DetailContactComponent } from '../detail-contact/detail-contact.component';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-contact',
@@ -17,10 +20,16 @@ export class ContactComponent implements OnInit {
    contacts: Contact[] = [];
    columns = ['photo', 'id','name','email','favorite'];
 
+   totalElements = 0;
+   page = 0;
+   size = 10;
+   pageSizeOptions : number[] = [10];
+
   constructor(
     private service: ContactService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -35,10 +44,12 @@ export class ContactComponent implements OnInit {
     })
   }
 
-  listContacts(){
-    this.service.list()
+  listContacts(page = 0, size = 10){
+    this.service.list(page, size)
       .subscribe(response => {
-        this.contacts = response;
+        this.contacts = response.content;
+        this.totalElements = response.totalElements;
+        this.page = response.number;
       })
   }
 
@@ -53,9 +64,10 @@ export class ContactComponent implements OnInit {
     const contact: Contact = new Contact(formValues.name, formValues.email);
     this.service.save(contact)
       .subscribe(response => {
-        let list: Contact[] = [...this.contacts, response];
-        this.contacts = list;
+        this.listContacts();
+        this.snackBar.open('Contact added', 'Success', {duration: 2000});
       })
+      this.contactForm.reset();
   }
 
   uploadPhoto(event, contact){
@@ -78,6 +90,11 @@ export class ContactComponent implements OnInit {
       height: '450px',
       data: contact
     });
+  }
+
+  toPage(event: PageEvent){
+    this.page = event.pageIndex;
+    this.listContacts(this.page, this.size);
   }
 
 }

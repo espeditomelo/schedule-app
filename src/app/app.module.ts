@@ -9,6 +9,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +44,8 @@ import { DetailContactComponent } from './detail-contact/detail-contact.componen
     MatCardModule,
     MatIconModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [
